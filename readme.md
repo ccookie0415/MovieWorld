@@ -107,3 +107,44 @@
 4. 본인의 홈피에서만 추천, 둘러보기 가능. 타인의 홈피에서는 불가능
 5. 방명록 (Guestbook 모델을 Vue로 연결해서 화면에 나타내기 힘들었음)
   - 아직 미완성, 5월 23일 진행 예정
+
+
+### 0523
+#### 오늘의 진행 과정
+1. 홈의 좌측 상단에 새로운 리뷰 목록을 받아올 수 있도록 함
+  - 인덱스 0부터 새로운 글이 저장 가능하도록 해서 최신 상태 저장 가능
+2. 유튜브 링크를 회원정보수정 페이지에서 수정할 수 있도록 함
+3. 찜, 작성 count가 갱신이 안 되었었는데 axios를 이용하여 직접 받아주어 자동 갱신 가능
+4. 리뷰 디테일 페이지에서 제목이 보이지 않거나 겹쳤었는데 3번과 같이 axios를 사용하여 갱신 가능하도록 함
+
+#### 어려웠던 점
+1. 리뷰 상세 페이지에서 해당 영화의 타이틀이 아닌 다른 영화의 타이틀이 나와서 해당 영화의 타이틀로 가져오게 함.
+	- review의 model에서 movie는 readonly로 받아왔기 때문에 title을 바로 받아올 수는 없었음
+	따라서 axios를 사용하여 title을 data로 전달
+	getMovieTitle(rmovie) { //rmovie = review.movie -> id
+      console.log(rmovie)
+    
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/${rmovie}`,
+        headers: {
+          'Authorization': `Token ${this.$store.state.token}`
+        },
+      })
+        .then((response) => {
+          console.log(response.data.title)
+          this.title =  response.data.title
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+	- 새로고침되는 시간에 따라 타이틀이 바로 갱신되지 않아서 setTime을 통해 조절
+created() {
+   . . .
+    setTimeout(()=>{ // 받아오는건 정상이니까 조금 느리게 받아와서 새고하는 기분
+      this.getMovieTitle(this.review.movie)
+        }, 50)
+  },
+
+1. !important를 사용하여 기본 css보다 우선순위로 두어 card img의 body margin 조절
