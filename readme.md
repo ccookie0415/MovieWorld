@@ -62,7 +62,7 @@
 
 ❷ 사용자 프로필, 홈
 
-- 닉네임, 자기소개, 사진, 
+- 닉네임, 자기소개, 사진 
 - 오늘의 기분
 - 팔로우, 팔로잉 수
 - 최근 작성한 리뷰
@@ -114,15 +114,13 @@
 
 ### ⚙ 기술 스택
 
-<img src="https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=Vue.js&logoColor=white">
-<img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white">
+<img src="https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=Vue.js&logoColor=white"><img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white">
 
 
 <br>
 
 ### 🔩 프로젝트 활용 도구
-<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
-<img src="https://img.shields.io/badge/GiTHub-181717?style=for-the-badge&logo=GitHub&logoColor=white">
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"><img src="https://img.shields.io/badge/GiTHub-181717?style=for-the-badge&logo=GitHub&logoColor=white">
 
 
 <br>
@@ -189,6 +187,6 @@
 | 방명록 수정 | `profiles/<int:user_id>/guestbooks/<int:guestbook_id>/` | changeInput |
 | 방명록 삭제 | `profiles/<int:user_id>/guestbooks/<int:guestbook_id>/` | deleteGuestbook |
 <br>
-
+<hr>
 
 ### 6. 기타 (느낀 점, 후기)
