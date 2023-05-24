@@ -30,18 +30,17 @@
         <div class="left__body__lists">
             <h4>{{ user?.nick_name }}</h4>
             <p v-if="user.self_introduction !== 'null'"> {{ user?.self_introduction }}</p>
-        
         </div>
+        
         <div class="left__body__footer">
         <div class="footer__title">오늘의 기분</div>
-        <select class="footer__selection">
-            <option>기쁨 😊</option>
-            <option>슬픔 😢</option>
-            <option>화남 😠</option>
-            <option>분노 😡</option>
-        </select>
+          {{ userFeel === 1 ? '기쁨 😊' 
+          : userFeel === 2 ? '슬픔 😢' 
+          : userFeel === 3 ? '분노 😡' 
+          : userFeel === 4 ? '까칠 😠' 
+          : userFeel === 5 ? '소심 😳' : '' }}
         </div>
-        
+        <hr>
         <div class="today">
           <span> 내가 추가한 일촌 {{ followings }} </span>
           <br>
@@ -67,6 +66,9 @@ export default {
     },
     userId() {
       return this.$store.state.userId;
+    },
+    userFeel(){
+      return this.$store.state.userFeel;
     },
     is_followed() {
       return this.$store.state.is_followed
@@ -107,13 +109,10 @@ export default {
           throw err;
         }
       });
-      console.log('갓음')
       // location.reload();
       setTimeout(()=>{ // 받아오는건 정상이니까 조금 느리게 받아와서 새고하는 기분
         this.$router.go(0)
         }, 5)
-      
-      console.log('새고')
     }
   },
   created() {

@@ -2,7 +2,7 @@
   <div class="movie-card">
     <br>
     <img :src="movie?.poster_URL" alt="#">
-    <div class="content">
+    <div class="content1">
       <h1>{{ movie?.title }}</h1>
       <!-- 좋아요 수 -->
       <h3>
@@ -12,11 +12,9 @@
       <p>{{ like_users_count }}명이 좋아합니다</p>
       <hr>
       <p><span class="name">장르</span> <span class="wall">|</span>
-        <span>
-          <span v-for="(genre, index) in movie?.genres" :key="index">
+          <span  v-for="(genre, index) in movie?.genres" :key="index">
             {{ genre.name }}
-        </span>
-        </span>
+          </span>
       </p>
       <p><span class="name">평점</span> <span class="wall">| </span>{{ movie?.popularity }}</p>
       <p><span class="name">개봉일</span><span class="wall"> | </span>{{ movie?.release_date }}</p>
@@ -79,7 +77,7 @@ export default {
   display: inline-block;
   position: relative;
   vertical-align: top;
-  justify-content: center;
+  justify-content1: center;
   text-align: left;
   width: 100%;
   vertical-align: top; */
@@ -101,7 +99,7 @@ export default {
   /* border: 3px solid #958a8a41; */
   box-shadow: 12px 12px #958a8a7a;
 }
-.content {
+.content1 {
   display: inline-block;
   width: 40%;
   margin-right: 5%;
@@ -109,7 +107,7 @@ export default {
   vertical-align: top;
 
 }
-.content > p{
+.content1 > p{
   /* display: flex; */
   white-space: normal; 
   word-break: keep-all;
@@ -117,7 +115,11 @@ export default {
   font-size: 70%;
 }
 
-.content > h1 {
+.content1 > span{
+  font-size: 5px;
+}
+
+.content1 > h1 {
   margin-bottom: 2px;
   width: 150%;
   font-size: 20px;

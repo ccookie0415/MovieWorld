@@ -19,12 +19,12 @@
       </div>
 
       <div class="form-in">
-        <label for="nickname">닉네임</label>
+        <div><label for="nickname">닉네임</label></div>
         <input type="text" id="nickname" v-model="nickname" maxlength="10"/>
       </div>
 
       <div class="form-in">
-        <label for="intro">자기소개</label>
+        <div><label for="intro">자기소개</label></div>
         <textarea
           name="intro"
           id="intro"
@@ -160,12 +160,8 @@ export default {
         data: formData,
       })
         .then((response) => {
-          console.log('1')
-          console.log(response)
-          console.log('가라피카츄')
           this.$router.push({ name: 'main', params: {userId : response.data.id} })
-          this.$router.go(0)
-          console.log('갓다')
+          // this.$router.go(0)
         })
         .catch((error) => {
           alert("모든 항목을 입력해주세요");

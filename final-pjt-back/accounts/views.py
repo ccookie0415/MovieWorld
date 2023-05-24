@@ -11,8 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404
-from .serializers import ProfileSerializer
-from .models import Profile
+from .serializers import ProfileSerializer, GuestbookSerializer
+from .models import Profile, Guestbook
 from movies.models import Review
 
 # Create your views here.
@@ -31,6 +31,7 @@ def my_profile(request):
         profile = Profile.objects.get(user=request.user.id)
         profile.nick_name = request.data.dict().get('nick_name')
         profile.self_introduction = request.data.dict().get('self_introduction')
+        profile.feel = request.data.dict().get('feel')
         if request.data.get('ytb', '').startswith('https://www.youtube.com/embed/'):
             profile.ytb = request.data.dict().get('ytb')
         else: 
@@ -150,3 +151,34 @@ def new_kind_movies(request):
     new_genre = sorted(genres.items(), key=lambda x: x[1])[0][0]
     return redirect('movies:genre_recommend', new_genre)
 
+@api_view(['POST', 'GET']) 
+def guestbook_create(request, user_id):
+    if request.method == 'POST':
+        profile = Profile.objects.get(pk=user_id)
+        serializer = GuestbookSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=profile, author=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+    elif request.method == 'GET':
+        guestbooks = Guestbook.objects.filter(user=user_id)
+        serializer = GuestbookSerializer(guestbooks, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def guestbook_detail(request, guestbook_id):
+    guestbook = Guestbook.objects.get(pk=guestbook_id)
+
+    if request.method == 'GET':
+        serializer = GuestbookSerializer(guestbook)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        guestbook.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'PUT':
+        serializer = GuestbookSerializer(guestbook, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)

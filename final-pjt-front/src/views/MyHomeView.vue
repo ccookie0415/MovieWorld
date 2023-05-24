@@ -69,7 +69,6 @@ export default {
   },
   computed: {
     user(){
-      console.log(this.$store.state.user.ytb)
       return this.$store.state.user
     },
     myMovies() {

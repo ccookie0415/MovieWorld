@@ -8,7 +8,7 @@
           </div>
           <div class="wrapper__right">
             <div class="wrapper__right__header">
-              <span class="wrapper__header__main"> 🎥 사이좋은 영화들, 무비월드</span>
+              <span class="wrapper__header__main"> 🎥  バr○l좋은 영화들, 무㉥ㅣ월드</span>
               <div class="wrapper__header__title" >
                 <!-- y2k -->
                 <span @click="play('https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/bgm.mp3')">BGM⏯</span> 
@@ -108,9 +108,9 @@ export default {
     },
     goHome(){ //새로고침할일없으면 없애고 다시 원래 라우터로 ㄱㄱ
       this.$router.push({ name: 'my_home' })
-      setTimeout(()=>{ // 받아오는건 정상이니까 조금 느리게 받아와서 새고하는 기분
-        this.$router.go(0)
-        }, 10)
+      // setTimeout(()=>{ // 받아오는건 정상이니까 조금 느리게 받아와서 새고하는 기분
+      //   this.$router.go(0)
+      //   }, 10)
     }
   },
   created() {
@@ -215,6 +215,7 @@ export default {
     width: 100%;
     color: gray;
     padding: 2px;
+    /* margin-left: 10px; */
 }
 
 .wrapper__right__header {

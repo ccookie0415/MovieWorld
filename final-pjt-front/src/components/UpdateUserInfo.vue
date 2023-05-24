@@ -16,12 +16,25 @@
         <label for="intro">자기소개</label>
         <textarea name="intro" id="intro" cols="30" rows="3" v-model="intro" maxlength="60"></textarea>
       </div>
+
+      <div class="form-in">
+        <label for="feel">오늘의 기분</label>
+        <select class="footer__selection1" v-bind:value="feel" @change="updateFeel" style="margin-left: 1px">
+          <option value="1">기쁨 😊</option>
+          <option value="2">슬픔 😢</option>
+          <option value="3">분노 😡</option>
+          <option value="4">까칠 😠</option>
+          <option value="5">소심 😳</option>
+        </select>
+      </div>
+
       <div class="form-in">
         <label for="ytb">유튜브 링크</label>
         <textarea name="ytb" id="ytb" cols="30" rows="2" v-model="ytb" maxlength="60"></textarea>
       </div>
         <p>유튜브 링크 형식: https://www.youtube.com/embed/영상코드 <br> 형식이 잘못되면 기존의 링크가 저장됩니다.</p> 
-      
+  
+
       <div class="form-in input-file-button">
         <label for="img" v-if="this.user.img === image">프로필 사진 <font-awesome-icon icon="fa-solid fa-image" /></label>
         <label for="img" class="selected" v-else>사진 선택됨</label>
@@ -54,12 +67,16 @@ export default {
       nickname: this.user.nick_name,
       image: this.user.img,
       intro: this.user.self_introduction,
-      ytb: this.user.ytb
+      ytb: this.user.ytb,
+      feel: this.user.feel
     }
   },
   methods: {
     uploadImg() {
       this.image = this.$refs.image.files
+    },
+    updateFeel(event) {
+    this.feel = event.target.value;
     },
     popExit() {
       this.$emit('pop-exit')
@@ -72,6 +89,7 @@ export default {
         formData.append('img', this.$refs.image.files[0])
       }
       formData.append('ytb', this.ytb)
+      formData.append('feel', this.feel)
 
       axios({
         method: 'put',
@@ -83,6 +101,7 @@ export default {
         data: formData,
       })
         .then((response) => {
+          
           this.$store.dispatch('getProfile', this.$route.params.userId)
           this.popExit()
         })
@@ -93,10 +112,19 @@ export default {
 
 
 <style>
+
+.footer__selection1 {
+    width: 82.5%;
+    color: gray;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
 .update-div {
   display: inline-block;
   width: 500px;
-  height: 500px;
+  height: 530px;
   position: absolute;
   top: -10px;
   left: 0px;
@@ -138,8 +166,10 @@ export default {
 
 
 .form-in > label {
-  padding-top: 5px;
+  /* padding-top: 5px; */
   vertical-align: baseline;
+  font-size: 13px;
+  margin-right: 5px;
 }
 
 .form-in > input[type="text"] {

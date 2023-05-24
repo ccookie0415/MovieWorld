@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     moveToMovie(movieId) {
-      console.log(movieId)
       this.$router.push({ name: 'movie_detail', params: { movie_id: movieId } });
     },
     getOneReview(reviewId) {
@@ -148,7 +147,6 @@ export default {
         data: {content: content},
       })
         .then((response) => {
-          console.log(response)
           this.getReviewComment(this.$route.params.review_id)
         })
         .catch((error) => {
@@ -210,14 +208,9 @@ export default {
           throw err;
         }
       });
-      console.log('갓음')
-      // location.reload();
       this.$router.go(0)
-      console.log('새고')
     },
     getMovieTitle(rmovie) { //rmovie = review.movie -> id
-      console.log(rmovie)
-    
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/${rmovie}`,
@@ -226,7 +219,6 @@ export default {
         },
       })
         .then((response) => {
-          // console.log(response.data.title)
           this.title =  response.data.title
         })
         .catch((error) => {
@@ -260,17 +252,12 @@ hr {
   width: 450px;
 }
 h2 {
-  /* font-family: Harmond; */
   color: rgb(0, 0, 0);
   text-shadow: 1px 1px #908581;
   font-size: 20px;
 
   display: inline-block;
-  /* position: relative; */
   text-align: center;
-  /* width: 200px; */
-  /* border-right: 1px solid black;
-  border-left: 1px solid black; */
 
   padding-bottom: 10px;
   margin-bottom: 10px;
@@ -369,7 +356,6 @@ button {
   margin-bottom: 15px;
   /* margin-bottom: 30px; */
   font-size: 25px;
-  font-family: 'Rebecca';
   text-shadow: 2px 2px  #746a6a61;
 }
 
@@ -447,13 +433,12 @@ button {
   display: inline-block;
   width: 50px;
   text-align: left;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .value {
-  margin-left: 17px;
-  font-size: 17px;
+  font-size: 16px;
   background-color: #55b2d467;
   border-radius: 10px;
   padding-left: 10px;
@@ -469,13 +454,13 @@ button {
   display: inline-block;
   width: 50px;
   text-align: left;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .day {
   margin-right: 50px;
-  font-size: 17px;
+  font-size: 14px;
 }
 
 </style>

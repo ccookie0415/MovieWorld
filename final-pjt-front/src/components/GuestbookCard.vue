@@ -1,37 +1,28 @@
 <template>
   <div>
     <div class="content" v-if="!update">
-      <p>{{ comment.content }}</p>
-      <!-- <hr> -->
-      <span>{{ comment.username }}</span>
-      <span>{{ comment.created_at.substr(0, 10) }}</span>
-      <span @click="likeUnlike">
-        <font-awesome-icon icon="fa-solid fa-heart" class="heart" v-show="is_liked"/>
-        <font-awesome-icon icon="fa-regular fa-heart" class="heart" v-show="!is_liked"/>
-        {{ like_users_count }}
-      </span>
+      <p>{{ guestbook.content }}</p>
+      <span>{{ guestbook.author }}</span>
+      <span>{{ guestbook.created_at.substr(0, 10) }}</span>
     </div>
 
     <div class="comment-create" v-else>
-      <form @submit.prevent="changeComment(comment.id)">
-        <input type="text" v-model.trim="newComment" maxlength="50">
+      <form @submit.prevent="changeGuestbook(guestbook.id)">
+        <input type="text" v-model.trim="newGuestbook" maxlength="50">
         <input type="submit" value="작성">
       </form>
     </div>
 
-      <div @click="popSelector" class="dot" v-show="comment.username === this.$store.state.username">
-        <font-awesome-icon icon="fa-solid fa-ellipsis-vertical" style="width:5px"/>
-        <div v-show="selector" class="pop">
-          <p @click="changeInput" class="pop-name">수정</p>
-          <hr>
-          <p @click="deleteComment(comment.id)" class="pop-name">삭제</p>
-        </div>
+    <div @click="popSelector" class="dot" v-show="guestbook.author === this.$store.state.username">
+      <font-awesome-icon icon="fa-solid fa-ellipsis-vertical" style="width:5px"/>
+      <div v-show="selector" class="pop">
+        <p @click="changeInput" class="pop-name">수정</p>
+        <hr>
+        <p @click="deleteGuestbook(guestbook.id)" class="pop-name">삭제</p>
       </div>
-
+    </div>
   </div>
 </template>
-
-
 
 <script>
 import axios from 'axios'
@@ -39,72 +30,46 @@ import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
-  name: 'CommentCard',
+  name: 'GuestbookCard',
   props: {
-    comment: Object,
-  },
-  computed: {
-    is_liked() {
-      if (this.comment.like_users.indexOf(this.$store.state.userId) === -1) {
-        return false
-      } else {
-        return true
-      }
-    },
-    like_users_count() {
-      return this.comment.like_users.length
-    },
+    guestbook: Object,
   },
   data() {
     return {
       selector: false,
       update: false,
-      newComment: this.comment.content
+      newGuestbook: this.guestbook.content
     }
   },
   methods: {
-    getCommentLike(comment_id) {
-      axios({
-        method: 'post',
-        url: `${API_URL}/api/v1/comments/${comment_id}/likes/`,
-        headers: {
-          'Authorization': `Token ${this.$store.state.token}`
-        },
-      })
-        .then((response) => {
-          this.is_liked = response.data.is_liked
-          this.like_users_count = response.data.like_users_count
-          this.$emit('change-comments')
-        })
-      },
-    likeUnlike() {
-      this.getCommentLike(this.comment.id)
-    },
     popSelector() {
-      if (! this.selector) {
+      if (!this.selector) {
         this.selector = true
-      } else { 
+      } else {
         this.selector = false
       }
     },
-    deleteComment(comment_id) {
+    deleteGuestbook(guestbookId) {
       axios({
         method: 'delete',
-        url: `${API_URL}/api/v1/comments/${comment_id}/`,
+        url: `${API_URL}/accounts/profiles/${guestbookId}/guestbooks/`,
         headers: {
           'Authorization': `Token ${this.$store.state.token}`
         },
       })
         .then((response) => {
-          this.$emit('change-comments')
+          this.$emit('guestbookDeleted')
+        })
+        .catch((error) => {
+          console.log(error)
         })
     },
     changeInput() {
       this.update = true
     },
-    changeComment(id) {
-      const content = this.newComment
-      const commentId = id
+    changeGuestbook(id) {
+      const content = this.newGuestbook
+      const guestbookId = id
 
       if (!content) {
         alert('내용을 입력하세요')
@@ -113,21 +78,24 @@ export default {
 
       axios({
         method: 'put',
-        url: `${API_URL}/api/v1/comments/${commentId}/`,
+        url: `${API_URL}/accounts/profiles/${guestbookId}/guestbooks/`,
         headers: {
-          'Authorization' : `Token ${this.$store.state.token}`
+          'Authorization': `Token ${this.$store.state.token}`
         },
-        data: {content: content},
+        data: { content: content },
       })
         .then((response) => {
-          this.$store.dispatch('getReviewComment', this.$route.params.review_id)
+          this.$emit('guestbookUpdated')
         })
+        .catch((error) => {
+          console.log(error)
+        })
+
       this.update = false
     }
   },
 }
 </script>
-
 <style scoped>
 div {
   margin: 0;

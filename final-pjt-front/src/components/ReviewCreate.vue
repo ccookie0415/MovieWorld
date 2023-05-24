@@ -77,6 +77,9 @@ export default {
       })
         .then((response) => {
           this.$router.push({name: 'review_detail', params: {review_id: response.data.id}})
+          setTimeout(()=>{ // 받아오는건 정상이니까 조금 느리게 받아와서 새고하는 기분
+          this.$router.go(0)
+          }, 10)
         })
         .catch((error) => {
           alert('리뷰를 작성할 수 없습니다')

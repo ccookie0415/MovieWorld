@@ -40,3 +40,8 @@ class Profile(models.Model):
     war = models.IntegerField(default=0)
     western = models.IntegerField(default=0)
 
+class Guestbook(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE) # 방명록 주인
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

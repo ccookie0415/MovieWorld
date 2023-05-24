@@ -33,6 +33,9 @@ export default {
   methods: {
     ReviewDetail(id) {
       this.$router.push({name: 'review_detail', params: {review_id: id}})
+      setTimeout(()=>{ // 받아오는건 정상이니까 조금 느리게 받아와서 새고하는 기분
+        this.$router.go(0)
+      }, 10)
     }
   }
 }
@@ -42,7 +45,6 @@ export default {
 
 
 h1 {
-  font-family: Harmond;
   color: black;
   text-shadow: 1px 1px #908581;
   font-size: 3vw;
