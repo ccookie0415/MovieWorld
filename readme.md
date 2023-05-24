@@ -147,4 +147,4 @@ created() {
         }, 50)
   },
 
-1. !important를 사용하여 기본 css보다 우선순위로 두어 card img의 body margin 조절
+2. !important를 사용하여 기본 css보다 우선순위로 두어 card img의 body margin 조절
