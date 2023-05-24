@@ -15,8 +15,8 @@ class Movie(models.Model):
     overview = models.TextField()
     runtime = models.IntegerField()
     genres = models.ManyToManyField(Genre, related_name='movie_genre')
-    popularity = models.FloatField()
     # 안씀
+    popularity = models.FloatField()
     season = models.IntegerField(default=0)
     weather = models.IntegerField(default=0)
 
