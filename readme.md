@@ -128,7 +128,7 @@
 <br>
 
 ### 📋 ERD
-![ERD](여기erd)
+![ERD](https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/movieworldERD.png)
 
 <br>
 
