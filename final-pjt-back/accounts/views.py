@@ -165,20 +165,24 @@ def guestbook_create(request, user_id):
         serializer = GuestbookSerializer(guestbooks, many=True)
         return Response(serializer.data)
 
+
 @api_view(['GET', 'PUT', 'DELETE'])
-def guestbook_detail(request, guestbook_id):
-    guestbook = Guestbook.objects.get(pk=guestbook_id)
+def guestbook_detail(request, user_id, guestbook_id):
+    try:
+        guestbook = Guestbook.objects.get(user=user_id, id=guestbook_id)
+    except Guestbook.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = GuestbookSerializer(guestbook)
         return Response(serializer.data)
-
-    elif request.method == 'DELETE':
-        guestbook.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
         serializer = GuestbookSerializer(guestbook, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        guestbook.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

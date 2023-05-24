@@ -1,17 +1,27 @@
-<!-- <template>
-  <div>
+<template>
+    <div>
+    <div class="header news__header">
+      <span>Guest book</span>
+      <span>방명록</span>
+    </div>
+
     <div class="sep-div">
       <GuestbookCreate :userId="userId" />
     </div>
+
+    <hr>
+
     <div class="sep-div">
       <GuestbookList :userId="userId" />
     </div>
-  </div>
+    </div>
+
 </template>
 
 <script>
 import GuestbookCreate from '@/components/GuestbookCreate';
 import GuestbookList from '@/components/GuestbookList';
+
 
 export default {
   name: 'MyGuestbookView',
@@ -22,61 +32,35 @@ export default {
   computed: {
     userId() {
       return this.$route.params.userId;
-    },
-  },
-};
-</script> -->
-
-<template>
-  <div>
-    <div class="sep-div">
-      <GuestbookCreate :userId="userId" @guestbookCreated="fetchGuestbooks" />
-    </div>
-    <div class="sep-div">
-      <GuestbookList :userId="userId" :guestbooks="guestbooks" />
-    </div>
-  </div>
-</template>
-
-<script>
-import GuestbookCreate from '@/components/GuestbookCreate';
-import GuestbookList from '@/components/GuestbookList';
-import axios from 'axios';
-
-const API_URL = 'http://127.0.0.1:8000';
-
-export default {
-  name: 'MyGuestbookView',
-  components: {
-    GuestbookCreate,
-    GuestbookList,
-  },
-  computed: {
-    userId() {
-      return this.$route.params.userId;
-    },
-  },
-  data() {
-    return {
-      guestbooks: [],
-    };
-  },
-  created() {
-    this.fetchGuestbooks();
-  },
-  methods: {
-    fetchGuestbooks() {
-      const userId = this.userId;
-
-      axios
-        .get(`${API_URL}/accounts/profiles/${userId}/guestbooks/`)
-        .then((response) => {
-          this.guestbooks = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     },
   },
 };
 </script>
+
+<style>
+
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.news__header {
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.header span:first-child {
+  font-size: 15px;
+  margin-right: 5px;
+  font-weight: 600;
+  color: #55B2D4;
+}
+
+.header span:last-child {
+  font-size: 6px;
+  font-weight: 600;
+}
+
+
+</style>

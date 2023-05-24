@@ -11,6 +11,5 @@ urlpatterns = [
 
     # path('profiles/<int:user_id>/guestbook/', views.guestbook_list),
     path('profiles/<int:user_id>/guestbooks/', views.guestbook_create),
-    path('profiles/<int:user_id>/guestbooks/<int:guestbook_id>/', views.guestbook_detail),
-
+    path('profiles/<int:user_id>/guestbook/<int:guestbook_id>/', views.guestbook_detail),
 ]
