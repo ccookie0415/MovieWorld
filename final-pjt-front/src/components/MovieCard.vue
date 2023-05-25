@@ -124,7 +124,6 @@ export default {
   width: 150%;
   font-size: 20px;
   /* font-size: 150%; */
-  font-family: 'Rebecca';
   text-shadow: 2px 2px  #746a6a61;
   white-space: normal; 
   word-break: keep-all;

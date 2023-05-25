@@ -41,7 +41,12 @@ class Profile(models.Model):
     western = models.IntegerField(default=0)
 
 class Guestbook(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE) # 방명록 주인
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150, editable=False)  # username 필드 추가
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)  # 방명록 주인
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.username = self.author.username  # 작성자의 username을 저장
+        super().save(*args, **kwargs)

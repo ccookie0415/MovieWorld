@@ -208,7 +208,9 @@ export default {
           throw err;
         }
       });
-      this.$router.go(0)
+      setTimeout(()=>{ // 받아오는건 정상이니까 조금 느리게 받아와서 새고하는 기분
+        this.$router.go(0)
+      }, 10)
     },
     getMovieTitle(rmovie) { //rmovie = review.movie -> id
       axios({

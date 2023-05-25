@@ -88,8 +88,10 @@ export default {
 
 .signup-input > label { 
   display: inline-block;
+  margin-top: 5px;
   width: 100px;
   text-align: center;
+  font-size: 15px;
 }
 
 .signup-input > input {
