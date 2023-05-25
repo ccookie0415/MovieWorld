@@ -186,8 +186,36 @@
 | 방명록 생성 | `profiles/<int:user_id>/guestbooks/<int:guestbook_id>/` | changeGuestbook |
 | 방명록 수정 | `profiles/<int:user_id>/guestbooks/<int:guestbook_id>/` | changeInput |
 | 방명록 삭제 | `profiles/<int:user_id>/guestbooks/<int:guestbook_id>/` | deleteGuestbook |
-<br>
+</div>
+</details>
+<br/>
+
+
+<details>
+  <summary>
+    <b>기능 소개 캡처</b>
+  </summary>
+
+  <div markdown="3">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/010.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/011.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/012.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/013.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/014.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/015.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/016.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/017.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/018.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/019.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/020.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/021.png">
+  <img src="https://raw.githubusercontent.com/dontk1llme/finalPJT/master/mp3/cap/022.png">
+
+</div>
+</details>
+<br/>
+
 <hr>
 
-### 6. 기타 (느낀 점, 후기)
-내일쓰자
+### __🎥 Movie World__; 싸이월드와 영화
+이상입니다.
